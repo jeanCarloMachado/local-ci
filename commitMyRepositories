@@ -1,0 +1,26 @@
+#!/bin/bash
+
+export NO_ITERATIVE=1
+
+commit() {
+    cd "$1" 2>/dev/null || (echo "Dir $1 does not exist" ; return )
+    echo "CURRENT PROJECT $(pwd)"
+    git-add-commit
+}
+
+
+commit "/home/jean/projects/grimoire"
+commit "/home/jean/projects/personalscripts"
+commit "/home/jean/projects/snippet"
+commit "/home/jean/projects/dotfiles"
+commit "/home/jean/projects/blog"
+commit "/home/jean/projects/resume"
+commit "/home/jean/projects/experiments"
+commit "/home/jean/Dropbox/projects/vimrc"
+commit "/home/jean/projects/git_private"
+commit "/home/jean/projects/PythonSearch"
+commit "/home/jean/projects/PySearchEntries"
+commit "/home/jean/projects/machineLearningExperiments"
+
+
+exit 0
