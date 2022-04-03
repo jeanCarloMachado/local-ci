@@ -8,6 +8,13 @@ commit() {
     git-add-commit
 }
 
+commitAskingDetails() {
+    cd "$1" 2>/dev/null || (echo "Dir $1 does not exist" ; return )
+    echo "CURRENT PROJECT $(pwd)"
+    precommit_assistant.py full_path
+
+}
+
 
 commit "/home/jean/projects/grimoire"
 commit "/home/jean/projects/personalscripts"
@@ -18,7 +25,7 @@ commit "/home/jean/projects/resume"
 commit "/home/jean/projects/experiments"
 commit "/home/jean/Dropbox/projects/vimrc"
 commit "/home/jean/projects/git_private"
-commit "/home/jean/projects/PythonSearch"
+commitAskingDetails "/home/jean/projects/PythonSearch"
 commit "/home/jean/projects/PySearchEntries"
 commit "/home/jean/projects/machineLearningExperiments"
 commit "/home/jean/projects/git-assistant"
