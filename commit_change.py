@@ -1,8 +1,11 @@
 #!/usr/bin/env python
+import logging
 import os
 
 import fire
 
+import sys, logging;
+logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)])
 
 class CommitChangeAssistant:
     """A tool to commit to git while using precommit"""
@@ -13,21 +16,17 @@ class CommitChangeAssistant:
         print("Start commit assistant")
         self.commit_message = CommitChangeAssistant.DEFAULT_COMMIT_MESSAGE
 
-    def full_path(self, commit_message=None):
+    def start(self, commit_message=None):
         """
         Executes the entire commit procedure with a push in the end
         """
 
+        if not os.path.exists(".pre-commit-config.yaml"):
+            logging.warning("No pre-commit configuration found, consider adding one")
+
         result = self.commit_and_retry(commit_message)
         if result:
             self.push_and_log()
-
-    def commit_and_retry(self, commit_message=None) -> bool:
-        result = self.commit(commit_message)
-        if not result:
-            return self._manage_error()
-
-        return result
 
     def commit(self, commit_message=None, see_diff=True) -> bool:
         self.commit_message = commit_message
@@ -45,10 +44,20 @@ class CommitChangeAssistant:
 
         return result == 0
 
+
+    def commit_and_retry(self, commit_message=None) -> bool:
+        result = self.commit(commit_message)
+        if not result:
+            return self._manage_error()
+
+        return result
+
+
     def push_and_log(self):
         command = "git push origin $(runFunction current_branch)"
         os.system(command)
         os.system("git log")
+
 
     def _manage_error(self) -> bool:
         message = f"""Current commit message: {self.commit_message}
