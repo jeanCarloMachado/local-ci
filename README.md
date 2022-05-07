@@ -1,4 +1,4 @@
-
+# Local CI
 
 A set of abstractions to make it easy to use the process of commiting as a CI process.
 
