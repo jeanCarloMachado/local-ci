@@ -11,23 +11,23 @@ commit() {
 commitAskingDetails() {
     cd "$1" 2>/dev/null || (echo "Dir $1 does not exist" ; return )
     echo "CURRENT PROJECT $(pwd)"
-    precommit_assistant.py full_path
+    commit_change.py full_path
 
 }
 
 
-commit "/home/jean/projects/grimoire"
-commit "/home/jean/projects/personalscripts"
-commit "/home/jean/projects/snippet"
-commit "/home/jean/projects/dotfiles"
-commit "/home/jean/projects/blog"
-commit "/home/jean/projects/resume"
-commit "/home/jean/projects/experiments"
-commit "/home/jean/Dropbox/projects/vimrc"
-commit "/home/jean/projects/git_private"
-commitAskingDetails "/home/jean/projects/PythonSearch"
-commit "/home/jean/projects/PySearchEntries"
-commit "/home/jean/projects/machineLearningExperiments"
-commit "/home/jean/projects/git-assistant"
+commit "$HOME/projects/grimoire"
+commit "$HOME/projects/personalscripts"
+commit "$HOME/projects/snippet"
+commit "$HOME/projects/dotfiles"
+commit "$HOME/projects/blog"
+commit "$HOME/projects/resume"
+commit "$HOME/projects/experiments"
+commit "$HOME/Dropbox/projects/vimrc"
+commit "$HOME/projects/git_private"
+commitAskingDetails "$HOME/projects/PythonSearch"
+commit "$HOME/projects/PySearchEntries"
+commit "$HOME/projects/machineLearningExperiments"
+commit "$HOME/projects/git-assistant"
 
 exit 0

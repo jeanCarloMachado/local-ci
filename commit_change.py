@@ -4,14 +4,14 @@ import os
 import fire
 
 
-class PreCommitAssistant:
+class CommitChangeAssistant:
     """A tool to commit to git while using precommit"""
 
-    default_commit_message = "Automatic commit snapshot"
+    DEFAULT_COMMIT_MESSAGE = "Automatic commit snapshot"
 
     def __init__(self):
         print("Start commit assistant")
-        self.commit_message = PreCommitAssistant.default_commit_message
+        self.commit_message = CommitChangeAssistant.DEFAULT_COMMIT_MESSAGE
 
     def full_path(self, commit_message=None):
         """
@@ -38,7 +38,7 @@ class PreCommitAssistant:
         if not self.commit_message:
             self.commit_message = input("Give a commit message: ")
             if not self.commit_message:
-                self.commit_message = PreCommitAssistant.default_commit_message
+                self.commit_message = CommitChangeAssistant.DEFAULT_COMMIT_MESSAGE
 
         os.system(f"git add . ")
         result = os.system(f"git commit -m '{self.commit_message}'")
@@ -81,4 +81,4 @@ Failed [t] try again, [s] skip verify, commit & push [v] view diff: """
 
 
 if __name__ == "__main__":
-    fire.Fire(PreCommitAssistant)
+    fire.Fire(CommitChangeAssistant)
