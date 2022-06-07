@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import fire
 
 from grimoire.ask_question import AskQuestion
