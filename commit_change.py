@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 import logging
 import os
+import sys
 
 import fire
 
-import sys, logging;
 logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)])
 
 class CommitChangeAssistant:
     """A tool to commit to git while using precommit"""
 
-    DEFAULT_COMMIT_MESSAGE = "Automatic commit snapshot"
+    DEFAULT_COMMIT_MESSAGE = "Automatic commit"
 
     def __init__(self):
         print("Start commit assistant")
@@ -44,7 +44,6 @@ class CommitChangeAssistant:
 
         return result == 0
 
-
     def commit_and_retry(self, commit_message=None) -> bool:
         result = self.commit(commit_message)
         if not result:
@@ -52,12 +51,10 @@ class CommitChangeAssistant:
 
         return result
 
-
     def push_and_log(self):
-        command = "git push origin $(runFunction current_branch)"
+        command = "git push origin $(current_branch.sh)"
         os.system(command)
         os.system("git log")
-
 
     def _manage_error(self) -> bool:
         message = f"""Current commit message: {self.commit_message}
@@ -77,15 +74,15 @@ Failed [t] try again, [s] skip verify, commit & push [v] view diff: """
         return False
 
     def _see_all_diff(self):
-        """ Shows the entire git diff staged and unstaged """
+        """Shows the entire git diff staged and unstaged"""
         os.system(f"git status -vv")
 
     def _see_uncached_diff(self):
-        """ SHows the entire git diff staged and unstaged """
+        """SHows the entire git diff staged and unstaged"""
         os.system(f"git diff")
 
     def _see_cached_diff(self):
-        """ Display only the already staged difference """
+        """Display only the already staged difference"""
         os.system(f"git diff --cached")
 
 

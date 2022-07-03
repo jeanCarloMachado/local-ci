@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-import fire
-
-from grimoire.ask_question import AskQuestion
 import os
 
-class Cli():
+import fire
+from grimoire.ask_question import AskQuestion
+
+
+class Cli:
     def ask(self):
         branch = AskQuestion().ask("Give the branch name")
         self.change(branch)
@@ -13,6 +14,5 @@ class Cli():
         os.system(f"git fetch ; git checkout {branch}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     fire.Fire(Cli)
-
