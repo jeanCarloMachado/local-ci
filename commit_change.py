@@ -32,6 +32,13 @@ class CommitChangeAssistant:
     def commit(self, commit_message=None, see_diff=True) -> bool:
         self.commit_message = commit_message
 
+        import subprocess
+
+        has_diff = subprocess.getoutput("git status --porcelain")
+        if not has_diff:
+            logging.info("No changes to commit. Exiting early.")
+            sys.exit(0)
+
         if see_diff:
             self._see_all_diff()
 
