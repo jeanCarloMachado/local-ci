@@ -40,6 +40,10 @@ class CommitChangeAssistant:
             if not self.commit_message:
                 self.commit_message = CommitChangeAssistant.DEFAULT_COMMIT_MESSAGE
 
+        result = os.system(f"auto_checks.py fix")
+        if result != 0:
+            return False
+
         os.system(f"git add . ")
         result = os.system(f"git commit -m '{self.commit_message}'")
 
