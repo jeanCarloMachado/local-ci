@@ -3,7 +3,7 @@
 import os
 
 
-class AutoFix:
+class AutoChecks:
     def fix(self):
         os.system("black . ")
         os.system("isort . ")
@@ -25,4 +25,4 @@ class AutoFix:
 if __name__ == "__main__":
     import fire
 
-    fire.Fire(AutoFix)
+    fire.Fire(AutoChecks)
