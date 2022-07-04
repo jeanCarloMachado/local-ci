@@ -9,7 +9,9 @@ logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdo
 
 
 class CommitChangeAssistant:
-    """A tool to commit to git while using precommit"""
+    """
+    A tool to commit to git while using precommit
+    """
 
     DEFAULT_COMMIT_MESSAGE = "Automatic commit"
 
