@@ -51,7 +51,6 @@ class AutoChecks:
     def tests(self):
         if self.is_python_project():
             return
-
         if not os.path.exists("tests"):
             print("There is no tests folder so will skip the tests")
             return

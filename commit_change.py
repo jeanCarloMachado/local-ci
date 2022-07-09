@@ -7,7 +7,6 @@ import fire
 
 logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)])
 
-
 class CommitChangeAssistant:
     """
     A tool to commit to git while using precommit
