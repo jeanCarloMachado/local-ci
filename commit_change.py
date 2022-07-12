@@ -7,6 +7,7 @@ import fire
 
 logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)])
 
+
 class CommitChangeAssistant:
     """
     A tool to commit to git while using precommit
@@ -18,10 +19,12 @@ class CommitChangeAssistant:
         print("Start commit assistant")
         self.commit_message = CommitChangeAssistant.DEFAULT_COMMIT_MESSAGE
 
-    def start(self, commit_message=None):
+    def start(self, commit_message=None, disable_add=False):
         """
         Executes the entire commit procedure with a push in the end
         """
+
+        self.disable_add = disable_add
 
         if not os.path.exists(".pre-commit-config.yaml"):
             logging.warning("No pre-commit configuration found, consider adding one")
@@ -30,7 +33,7 @@ class CommitChangeAssistant:
         if result:
             self.push_and_log()
 
-    def commit(self, commit_message=None, see_diff=True) -> bool:
+    def commit(self, commit_message=None, see_diff=True):
         self.commit_message = commit_message
 
         import subprocess
@@ -52,14 +55,18 @@ class CommitChangeAssistant:
         if result != 0:
             return False
 
+        if not self.disable_add:
+            os.system("git add .")
         os.system(f"git add . ")
         result = os.system(f"git commit -m '{self.commit_message}'")
 
-        return result == 0
+        if result != 0:
+            raise Exception("The commit failed")
 
     def commit_and_retry(self, commit_message=None) -> bool:
-        result = self.commit(commit_message)
-        if not result:
+        try:
+            result = self.commit(commit_message)
+        except Exception as e:
             return self._manage_error()
 
         return result
