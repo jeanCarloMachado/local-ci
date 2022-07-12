@@ -20,10 +20,13 @@ class CommitChangeAssistant:
         self.commit_message = CommitChangeAssistant.DEFAULT_COMMIT_MESSAGE
         self.disable_add = False
 
-    def start(self, commit_message=None, disable_add=False):
+    def start(self, m=None, commit_message=None, disable_add=False):
         """
         Executes the entire commit procedure with a push in the end
         """
+
+        if m:
+            commit_message = m
 
         if disable_add:
             print("Disabing the process of adding files to the commit")
