@@ -18,6 +18,7 @@ class CommitChangeAssistant:
     def __init__(self):
         print("Start commit assistant")
         self.commit_message = CommitChangeAssistant.DEFAULT_COMMIT_MESSAGE
+        self.disable_add = False
 
     def start(self, commit_message=None, disable_add=False):
         """
@@ -59,7 +60,7 @@ class CommitChangeAssistant:
 
         if not self.disable_add:
             os.system("git add .")
-        os.system(f"git add . ")
+
         result = os.system(f"git commit -m '{self.commit_message}'")
 
         if result != 0:
