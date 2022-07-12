@@ -24,7 +24,9 @@ class CommitChangeAssistant:
         Executes the entire commit procedure with a push in the end
         """
 
-        self.disable_add = disable_add
+        if disable_add:
+            print("Disabing the process of adding files to the commit")
+            self.disable_add = True
 
         if not os.path.exists(".pre-commit-config.yaml"):
             logging.warning("No pre-commit configuration found, consider adding one")
