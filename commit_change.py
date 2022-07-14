@@ -40,9 +40,9 @@ class CommitChangeAssistant:
         if not os.path.exists(".pre-commit-config.yaml"):
             logging.warning("No pre-commit configuration found, consider adding one")
 
-        result = self.commit_and_retry(commit_message)
-        if result:
-            self.push_and_log()
+        self.commit_and_retry(commit_message)
+        
+        self.push_and_log()
 
     def commit(self, commit_message=None, see_diff=True):
         self.commit_message = commit_message
