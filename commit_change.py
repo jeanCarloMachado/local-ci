@@ -41,7 +41,7 @@ class CommitChangeAssistant:
             logging.warning("No pre-commit configuration found, consider adding one")
 
         self.commit_and_retry(commit_message)
-        
+
         self.push_and_log()
 
     def commit(self, commit_message=None, see_diff=True):
