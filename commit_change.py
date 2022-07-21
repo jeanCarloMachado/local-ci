@@ -28,6 +28,8 @@ class CommitChangeAssistant:
         """
 
         self._require_commit_message = require_coommit_message
+        if require_coommit_message:
+            print("Requiring commit message seted")
         self._disable_fail_on_autochecks_errors = disable_fail_on_autochecks_errors
         if self._disable_fail_on_autochecks_errors:
             print("Disabled checks failure.  Still running but not blocking the commit")
