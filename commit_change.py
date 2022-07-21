@@ -19,12 +19,15 @@ class CommitChangeAssistant:
         print("Start commit assistant")
         self.commit_message = CommitChangeAssistant.DEFAULT_COMMIT_MESSAGE
         self.disable_add = False
+        self._require_commit_message = False
 
-    def start(self, m=None, commit_message=None, disable_add=False, disable_fail_on_autochecks_errors=False):
+    def start(self, m=None, commit_message=None, disable_add=False, disable_fail_on_autochecks_errors=False, require_coommit_message=False):
+
         """
         Executes the entire commit procedure with a push in the end
         """
 
+        self._require_commit_message = require_coommit_message
         self._disable_fail_on_autochecks_errors = disable_fail_on_autochecks_errors
         if self._disable_fail_on_autochecks_errors:
             print("Disabled checks failure.  Still running but not blocking the commit")
@@ -60,6 +63,9 @@ class CommitChangeAssistant:
         if not self.commit_message:
             self.commit_message = input("Give a commit message: ")
             if not self.commit_message:
+                if self._require_commit_message:
+                    raise Exception("No commit message given")
+
                 self.commit_message = CommitChangeAssistant.DEFAULT_COMMIT_MESSAGE
 
         result = os.system(f"auto_checks.py fix")
