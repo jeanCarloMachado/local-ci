@@ -34,7 +34,7 @@ class AutoChecks:
         os.system("isort . ")
 
     def markdown_linter(self):
-        os.system("markdownlint --fix .")
+        os.system("markdownlint --fix . 2>/dev/null")
 
     def secrets(self):
         os.system("tell-me-your-secrets .")

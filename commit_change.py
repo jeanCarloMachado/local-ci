@@ -91,9 +91,8 @@ class CommitChangeAssistant:
         return result
 
     def push_and_log(self):
-        command = "git push origin $(current_branch.sh)"
-        os.system(command)
-        os.system("git log")
+        os.system("git push origin $(current_branch.sh)")
+        os.system("echo $(pwd) ; git log")
 
     def _manage_error(self) -> bool:
         message = f"""Current commit message: {self.commit_message}
