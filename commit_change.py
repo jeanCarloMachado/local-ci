@@ -21,7 +21,14 @@ class CommitChangeAssistant:
         self.disable_add = False
         self._require_commit_message = False
 
-    def start(self, m=None, commit_message=None, disable_add=False, disable_fail_on_autochecks_errors=False, require_coommit_message=False):
+    def start(
+        self,
+        m=None,
+        commit_message=None,
+        disable_add=False,
+        disable_fail_on_autochecks_errors=False,
+        require_coommit_message=False,
+    ):
 
         """
         Executes the entire commit procedure with a push in the end
@@ -33,7 +40,6 @@ class CommitChangeAssistant:
         self._disable_fail_on_autochecks_errors = disable_fail_on_autochecks_errors
         if self._disable_fail_on_autochecks_errors:
             print("Disabled checks failure.  Still running but not blocking the commit")
-
 
         if m:
             commit_message = m
@@ -69,6 +75,8 @@ class CommitChangeAssistant:
                     raise Exception("No commit message given")
 
                 self.commit_message = CommitChangeAssistant.DEFAULT_COMMIT_MESSAGE
+
+        os.system(f"clipboard set_content '{self.commit_message}'")
 
         result = os.system(f"auto_checks.py fix")
         if result != 0 and not self._disable_fail_on_autochecks_errors:
